@@ -12,7 +12,7 @@
 
 <meta name="author" content="Markus Wamser" />
 
-<meta name="date" content="2016-12-09" />
+<meta name="date" content="2017-02-10" />
 
 <title>Strings</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Strings</h1>
 <h4 class="author"><em>Markus Wamser</em></h4>
-<h4 class="date"><em>2016-12-09</em></h4>
+<h4 class="date"><em>2017-02-10</em></h4>
 
 
 
@@ -85,8 +85,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="demo" class="section level2">
 <h2>demo</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">strHead</span>(s)</code></pre></div>
-<pre><code>## Warning in strHead(s): '.Random.seed' ist kein Integer-Vektor sondern vom
-## Typ 'NULL', wird also ignoriert</code></pre>
 <pre><code>## [1] &quot;Y&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">strHeadLower</span>(s)</code></pre></div>
 <pre><code>## [1] &quot;y&quot;</code></pre>
@@ -108,18 +106,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">microbenchmark</span>(<span class="kw">substr</span>(s,<span class="dv">1</span>,<span class="dv">1</span>),<span class="kw">strHead</span>(s),<span class="dt">times=</span><span class="dv">100000</span>)</code></pre></div>
 <pre><code>## Unit: microseconds
 ##             expr   min    lq     mean median    uq       max neval
-##  substr(s, 1, 1) 1.182 1.576 2.366562  1.970 1.970  4091.953 1e+05
-##       strHead(s) 2.757 3.545 6.296062  3.546 3.939 71205.886 1e+05</code></pre>
+##  substr(s, 1, 1) 1.182 1.576 1.921486  1.970 1.970  2522.124 1e+05
+##       strHead(s) 3.151 3.545 5.359704  3.546 3.939 83443.543 1e+05</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">microbenchmark</span>(<span class="kw">tolower</span>(<span class="kw">substr</span>(s,<span class="dv">1</span>,<span class="dv">1</span>)),<span class="kw">strHeadLower</span>(s),<span class="dt">times=</span><span class="dv">100000</span>)</code></pre></div>
 <pre><code>## Unit: microseconds
 ##                      expr   min    lq     mean median    uq      max neval
-##  tolower(substr(s, 1, 1)) 2.757 3.152 3.985980  3.545 3.546 3570.121 1e+05
-##           strHeadLower(s) 3.151 3.546 5.204711  3.939 3.940 8561.595 1e+05</code></pre>
+##  tolower(substr(s, 1, 1)) 2.757 3.151 3.418916  3.152 3.545   132.33 1e+05
+##           strHeadLower(s) 3.151 3.939 5.601933  3.939 4.333 83933.08 1e+05</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">microbenchmark</span>(<span class="kw">substring</span>(s,<span class="dv">2</span>),<span class="kw">strTail</span>(s),<span class="dt">times=</span><span class="dv">100000</span>)</code></pre></div>
 <pre><code>## Unit: microseconds
 ##             expr   min    lq     mean median    uq      max neval
-##  substring(s, 2) 3.939 4.726 5.547589  4.727 5.121 3553.186 1e+05
-##       strTail(s) 4.726 5.121 6.961328  5.514 5.515 6540.036 1e+05</code></pre>
+##  substring(s, 2) 3.939 4.727 4.982714  4.727 5.121  137.056 1e+05
+##       strTail(s) 4.726 5.121 6.295885  5.515 5.908 4536.988 1e+05</code></pre>
 </div>
 </div>
 <div id="take-and-drop" class="section level1">
@@ -135,13 +133,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">microbenchmark</span>(<span class="kw">substr</span>(s,<span class="dv">1</span>,<span class="dv">42</span>),<span class="kw">strTake</span>(s,<span class="dv">42</span>),<span class="dt">times=</span><span class="dv">100000</span>)</code></pre></div>
 <pre><code>## Unit: microseconds
 ##              expr   min    lq     mean median    uq      max neval
-##  substr(s, 1, 42) 1.576 1.970 2.377756  1.970 2.364 3259.385 1e+05
-##    strTake(s, 42) 3.545 4.333 5.894722  4.333 4.333 6517.587 1e+05</code></pre>
+##  substr(s, 1, 42) 1.576 1.970 2.125501  1.970 2.363 3687.485 1e+05
+##    strTake(s, 42) 3.545 4.333 5.130718  4.333 4.727 4408.203 1e+05</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">microbenchmark</span>(<span class="kw">substring</span>(s,<span class="dv">43</span>),<span class="kw">strDrop</span>(s,<span class="dv">42</span>),<span class="dt">times=</span><span class="dv">100000</span>)</code></pre></div>
 <pre><code>## Unit: microseconds
 ##              expr   min    lq     mean median    uq      max neval
-##  substring(s, 43) 3.939 4.333 5.467420  4.727 4.727 3199.916 1e+05
-##    strDrop(s, 42) 4.726 5.514 7.680432  5.908 5.909 7598.273 1e+05</code></pre>
+##  substring(s, 43) 3.939 4.333 4.863169  4.727 4.727 3565.396 1e+05
+##    strDrop(s, 42) 4.727 5.515 6.462964  5.908 5.909 4394.420 1e+05</code></pre>
 </div>
 
 
