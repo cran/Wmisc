@@ -12,7 +12,7 @@
 
 <meta name="author" content="Markus Wamser" />
 
-<meta name="date" content="2017-10-03" />
+<meta name="date" content="2018-01-13" />
 
 <title>Strings</title>
 
@@ -70,14 +70,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Strings</h1>
 <h4 class="author"><em>Markus Wamser</em></h4>
-<h4 class="date"><em>2017-10-03</em></h4>
+<h4 class="date"><em>2018-01-13</em></h4>
 
 
 
 <p>A few examples of the string helper functions and a comparison to <code>substr</code> and other R base functions.</p>
 <p>First of all, we want the package loaded and attached. Same for the benchmarks.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Wmisc)
-<span class="kw">library</span>(microbenchmark)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Wmisc)</code></pre></div>
 <p>A string from (<a href="http://slipsum.com/" class="uri">http://slipsum.com/</a>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s &lt;-<span class="st"> &quot;You think water moves fast? You should see ice. It moves like it has a mind. Like it knows it killed the world once and got a taste for murder. After the avalanche, it took us a week to climb out. Now, I don't know exactly when we turned on each other, but I know that seven of us survived the slide... and only five made it out. Now we took an oath, that I'm breaking now. We said we'd say it was the snow that killed the other two, but it wasn't. Nature is lethal but it doesn't hold a candle to man.&quot;</span></code></pre></div>
 <div id="head-and-tail" class="section level1">
@@ -102,22 +101,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="benchmark" class="section level2">
 <h2>benchmark</h2>
-<p>The benchmark results will vary greatly depending on the version of R used. With R 3.3 the built-in functions should be preferred.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">microbenchmark</span>(<span class="kw">substr</span>(s,<span class="dv">1</span>,<span class="dv">1</span>),<span class="kw">strHead</span>(s),<span class="dt">times=</span><span class="dv">100000</span>)</code></pre></div>
-<pre><code>## Unit: microseconds
-##             expr   min    lq     mean median    uq       max neval
-##  substr(s, 1, 1) 1.182 1.576 1.897011  1.970 1.970  2855.704 1e+05
-##       strHead(s) 3.151 3.939 6.963364  3.939 4.333 85141.762 1e+05</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">microbenchmark</span>(<span class="kw">tolower</span>(<span class="kw">substr</span>(s,<span class="dv">1</span>,<span class="dv">1</span>)),<span class="kw">strHeadLower</span>(s),<span class="dt">times=</span><span class="dv">100000</span>)</code></pre></div>
-<pre><code>## Unit: microseconds
-##                      expr   min    lq     mean median    uq      max neval
-##  tolower(substr(s, 1, 1)) 2.757 3.151 3.450931  3.152 3.545  148.871 1e+05
-##           strHeadLower(s) 3.545 4.333 5.151262  4.333 4.726 4405.841 1e+05</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">microbenchmark</span>(<span class="kw">substring</span>(s,<span class="dv">2</span>),<span class="kw">strTail</span>(s),<span class="dt">times=</span><span class="dv">100000</span>)</code></pre></div>
+<p>The benchmark results will vary greatly depending on the version of R used. With R 3.3 (upwards) the built-in functions should be preferred.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="kw">requireNamespace</span>(<span class="st">&quot;DiagrammeR&quot;</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) { <span class="co"># only benchmark if microbenchmark is installed</span>
+  <span class="kw">library</span>(microbenchmark)
+
+  <span class="kw">microbenchmark</span>(<span class="kw">substr</span>(s,<span class="dv">1</span>,<span class="dv">1</span>),<span class="kw">strHead</span>(s),<span class="dt">times=</span><span class="dv">100000</span>)
+  <span class="kw">microbenchmark</span>(<span class="kw">tolower</span>(<span class="kw">substr</span>(s,<span class="dv">1</span>,<span class="dv">1</span>)),<span class="kw">strHeadLower</span>(s),<span class="dt">times=</span><span class="dv">100000</span>)
+  <span class="kw">microbenchmark</span>(<span class="kw">substring</span>(s,<span class="dv">2</span>),<span class="kw">strTail</span>(s),<span class="dt">times=</span><span class="dv">100000</span>)
+} <span class="cf">else</span> {
+  <span class="kw">print</span>(<span class="st">&quot;The benchmarks were skipped as package microbenchmark is not installed.&quot;</span>)
+} </code></pre></div>
+<pre><code>## Warning: package 'microbenchmark' was built under R version 3.4.3</code></pre>
 <pre><code>## Unit: microseconds
 ##             expr   min    lq     mean median    uq      max neval
-##  substring(s, 2) 3.939 4.726 4.939813  4.727 5.120  385.566 1e+05
-##       strTail(s) 5.120 5.515 6.961758  5.908 5.909 5163.186 1e+05</code></pre>
+##  substring(s, 2) 4.333 4.727 5.226814  5.121 5.514   90.584 1e+05
+##       strTail(s) 5.120 5.908 7.284357  5.909 6.302 5777.985 1e+05</code></pre>
 </div>
 </div>
 <div id="take-and-drop" class="section level1">
@@ -130,16 +128,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## [1] &quot; ice. It moves like it has a mind. Like it knows it killed the world once and got a taste for murder. After the avalanche, it took us a week to climb out. Now, I don't know exactly when we turned on each other, but I know that seven of us survived the slide... and only five made it out. Now we took an oath, that I'm breaking now. We said we'd say it was the snow that killed the other two, but it wasn't. Nature is lethal but it doesn't hold a candle to man.&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">strDrop</span>(s,<span class="dv">42</span>)</code></pre></div>
 <pre><code>## [1] &quot; ice. It moves like it has a mind. Like it knows it killed the world once and got a taste for murder. After the avalanche, it took us a week to climb out. Now, I don't know exactly when we turned on each other, but I know that seven of us survived the slide... and only five made it out. Now we took an oath, that I'm breaking now. We said we'd say it was the snow that killed the other two, but it wasn't. Nature is lethal but it doesn't hold a candle to man.&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">microbenchmark</span>(<span class="kw">substr</span>(s,<span class="dv">1</span>,<span class="dv">42</span>),<span class="kw">strTake</span>(s,<span class="dv">42</span>),<span class="dt">times=</span><span class="dv">100000</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="kw">requireNamespace</span>(<span class="st">&quot;DiagrammeR&quot;</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) { <span class="co"># only benchmark if microbenchmark is installed</span>
+  <span class="kw">microbenchmark</span>(<span class="kw">substr</span>(s,<span class="dv">1</span>,<span class="dv">42</span>),<span class="kw">strTake</span>(s,<span class="dv">42</span>),<span class="dt">times=</span><span class="dv">100000</span>)
+  <span class="kw">microbenchmark</span>(<span class="kw">substring</span>(s,<span class="dv">43</span>),<span class="kw">strDrop</span>(s,<span class="dv">42</span>),<span class="dt">times=</span><span class="dv">100000</span>)
+}  </code></pre></div>
 <pre><code>## Unit: microseconds
-##              expr   min    lq     mean median    uq      max neval
-##  substr(s, 1, 42) 1.576 1.970 2.113599  1.970 2.364   161.08 1e+05
-##    strTake(s, 42) 3.939 4.726 6.451249  4.727 4.727 92959.40 1e+05</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">microbenchmark</span>(<span class="kw">substring</span>(s,<span class="dv">43</span>),<span class="kw">strDrop</span>(s,<span class="dv">42</span>),<span class="dt">times=</span><span class="dv">100000</span>)</code></pre></div>
-<pre><code>## Unit: microseconds
-##              expr   min    lq     mean median    uq      max neval
-##  substring(s, 43) 3.939 4.333 4.767279  4.727 4.727  216.611 1e+05
-##    strDrop(s, 42) 5.121 5.908 7.010260  5.909 6.302 5893.752 1e+05</code></pre>
+##              expr   min    lq     mean median    uq        max neval
+##  substring(s, 43) 4.333 4.727 5.647717  5.121 5.515   4641.765 1e+05
+##    strDrop(s, 42) 5.514 6.302 9.015308  6.303 6.696 116355.227 1e+05</code></pre>
 </div>
 
 

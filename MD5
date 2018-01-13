@@ -1,4 +1,4 @@
-ff0dad7a12a39ce237787180c9387733 *DESCRIPTION
+9649f3712a034478598ad69e92049973 *DESCRIPTION
 0da6fd18fadd7ab0e125ac09c7cb7ccd *NAMESPACE
 f757bae3cc890acddc0153de5fb8b243 *NEWS.md
 f3af6939a6463ff1227f9f3852c99180 *R/Automat.R
@@ -6,13 +6,13 @@ f3af6939a6463ff1227f9f3852c99180 *R/Automat.R
 13cb5ad4ec5b26c3e852c1c0f3e64bd9 *R/Strings.R
 aa05a5882da727e2a022fa3cf9341f13 *R/Tokenizer.R
 bcf2dd0223b3d0619a86fb9ec3f67bec *R/WMisc.R
-2655c28f5e1161937a5d0d9fb1a7e25a *build/vignette.rds
+e4e373c61870c83beb64dd02b5875103 *build/vignette.rds
 8a1f1e83da8b55e079103cf804d7c3d9 *inst/doc/Automat.R
 b7ca1436c420db6594cb54c555c51724 *inst/doc/Automat.Rmd
-2faf3beedc11109fdcb64d7a2a627054 *inst/doc/Automat.html
-8a91c33a3b84af24c0e7751ce051ad58 *inst/doc/Strings.R
-38dfbec60d7f4015acd89af8e92fde1f *inst/doc/Strings.Rmd
-d7703043a099d6c0308bd7819b362c15 *inst/doc/Strings.html
+4694294abc3dbb7f54b604b21f7fb592 *inst/doc/Automat.html
+db76a8c688bbcdaa8b7d8925220e4d20 *inst/doc/Strings.R
+c0d2353b6e2f50fd6bef101427a32ce5 *inst/doc/Strings.Rmd
+eb135dd8654afbf0bd51de35f88fd083 *inst/doc/Strings.html
 2aab187b60c757cf608acdc266b1199a *man/Automat.Rd
 7809cd47ace92b060e03fb1a089b03f4 *man/Strings.Rd
 080745f12c4f0c246de0ec772d859b3d *man/Tokenizer.Rd
@@ -41,4 +41,4 @@ a29e4773e4986cea6be90df7042d60ca *tests/testthat/test-strings.R
 39a84df49573940462d996f2ff9418b8 *tests/testthat/test-tokenizer.R
 ad32f34363b287c0b875119d3264b557 *tests/testthat/token.txt
 b7ca1436c420db6594cb54c555c51724 *vignettes/Automat.Rmd
-38dfbec60d7f4015acd89af8e92fde1f *vignettes/Strings.Rmd
+c0d2353b6e2f50fd6bef101427a32ce5 *vignettes/Strings.Rmd

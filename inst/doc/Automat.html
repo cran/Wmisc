@@ -12,7 +12,7 @@
 
 <meta name="author" content="Markus Wamser" />
 
-<meta name="date" content="2017-10-03" />
+<meta name="date" content="2018-01-13" />
 
 <title>Using Automat</title>
 
@@ -74,7 +74,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Using Automat</h1>
 <h4 class="author"><em>Markus Wamser</em></h4>
-<h4 class="date"><em>2017-10-03</em></h4>
+<h4 class="date"><em>2018-01-13</em></h4>
 
 
 
@@ -84,21 +84,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>First of all, we want the package loaded and attached.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Wmisc)</code></pre></div>
 <p>A new machine is then easily produced.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M &lt;-<span class="st"> </span>Automat$<span class="kw">new</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M &lt;-<span class="st"> </span>Automat<span class="op">$</span><span class="kw">new</span>()</code></pre></div>
 </div>
 <div id="basic-operation" class="section level2">
 <h2>Basic operation</h2>
 <p>Let’s add the simple operations: Assuming there are enough beans available, brew a nice cup of joe.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M$<span class="kw">addTransition</span>(<span class="st">&quot;beans available&quot;</span>,<span class="st">&quot;button pressed&quot;</span>,<span class="st">&quot;ground coffee&quot;</span>,function(s,i,t){
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M<span class="op">$</span><span class="kw">addTransition</span>(<span class="st">&quot;beans available&quot;</span>,<span class="st">&quot;button pressed&quot;</span>,<span class="st">&quot;ground coffee&quot;</span>,<span class="cf">function</span>(s,i,t){
   <span class="st">&quot;grinding coffee&quot;</span>
 })
-M$<span class="kw">addTransition</span>(<span class="st">&quot;ground coffee&quot;</span>,<span class="st">&quot;heat water&quot;</span>,<span class="st">&quot;water heated&quot;</span>,function(s,i,t){
+M<span class="op">$</span><span class="kw">addTransition</span>(<span class="st">&quot;ground coffee&quot;</span>,<span class="st">&quot;heat water&quot;</span>,<span class="st">&quot;water heated&quot;</span>,<span class="cf">function</span>(s,i,t){
   <span class="st">&quot;heating water&quot;</span>
 })
-M$<span class="kw">addTransition</span>(<span class="st">&quot;water heated&quot;</span>,<span class="st">&quot;brew coffee&quot;</span>,<span class="st">&quot;coffee ready&quot;</span>,function(s,i,t){
+M<span class="op">$</span><span class="kw">addTransition</span>(<span class="st">&quot;water heated&quot;</span>,<span class="st">&quot;brew coffee&quot;</span>,<span class="st">&quot;coffee ready&quot;</span>,<span class="cf">function</span>(s,i,t){
   <span class="st">&quot;brewing coffee&quot;</span>
 })
-M$<span class="kw">addTransition</span>(<span class="st">&quot;coffee ready&quot;</span>,<span class="st">&quot;take coffee&quot;</span>,<span class="st">&quot;beans available&quot;</span>,function(s,i,t){
+M<span class="op">$</span><span class="kw">addTransition</span>(<span class="st">&quot;coffee ready&quot;</span>,<span class="st">&quot;take coffee&quot;</span>,<span class="st">&quot;beans available&quot;</span>,<span class="cf">function</span>(s,i,t){
   <span class="st">&quot;enjoy your coffee&quot;</span>
 })
 
@@ -106,97 +106,96 @@ M</code></pre></div>
 <pre><code>## An Automat with 4 states.
 ## Current state is: not set</code></pre>
 <p>This is how out machine looks like:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M$<span class="kw">visualize</span>()</code></pre></div>
-<pre><code>## Warning: package 'bindrcpp' was built under R version 3.3.3</code></pre>
-<div id="htmlwidget-0bacd69868f453465ce0" style="width:288px;height:288px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0bacd69868f453465ce0">{"x":{"diagram":"digraph {\n\n  \"1\" [label = \"beans available\", style = \"filled\", color = \"royalblue2\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"2\" [label = \"coffee ready\", style = \"filled\", color = \"royalblue2\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"3\" [label = \"ground coffee\", style = \"filled\", color = \"royalblue2\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"4\" [label = \"water heated\", style = \"filled\", color = \"royalblue2\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n\"1\"->\"3\" [id = \"1\", color = \"#000000\", fontcolor = \"#000000\", label = \"button pressed, f()\"] \n\"2\"->\"1\" [id = \"2\", color = \"#000000\", fontcolor = \"#000000\", label = \"take coffee, f()\"] \n\"3\"->\"4\" [id = \"3\", color = \"#000000\", fontcolor = \"#000000\", label = \"heat water, f()\"] \n\"4\"->\"2\" [id = \"4\", color = \"#000000\", fontcolor = \"#000000\", label = \"brew coffee, f()\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M<span class="op">$</span><span class="kw">visualize</span>()</code></pre></div>
+<div id="htmlwidget-a29fbc117d6c9c1fbbc9" style="width:288px;height:288px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a29fbc117d6c9c1fbbc9">{"x":{"diagram":"digraph {\n\n  \"1\" [label = \"beans available\", style = \"filled\", color = \"royalblue2\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"2\" [label = \"coffee ready\", style = \"filled\", color = \"royalblue2\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"3\" [label = \"ground coffee\", style = \"filled\", color = \"royalblue2\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"4\" [label = \"water heated\", style = \"filled\", color = \"royalblue2\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n\"1\"->\"3\" [id = \"1\", color = \"#000000\", fontcolor = \"#000000\", label = \"button pressed, f()\"] \n\"2\"->\"1\" [id = \"2\", color = \"#000000\", fontcolor = \"#000000\", label = \"take coffee, f()\"] \n\"3\"->\"4\" [id = \"3\", color = \"#000000\", fontcolor = \"#000000\", label = \"heat water, f()\"] \n\"4\"->\"2\" [id = \"4\", color = \"#000000\", fontcolor = \"#000000\", label = \"brew coffee, f()\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 <p>Before we can start an example execution, we need to set the initial state:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M$<span class="kw">setState</span>(<span class="st">&quot;beans available&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M<span class="op">$</span><span class="kw">setState</span>(<span class="st">&quot;beans available&quot;</span>)
 M</code></pre></div>
 <pre><code>## An Automat with 4 states.
 ## Current state is: beans available</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M$<span class="kw">visualize</span>()</code></pre></div>
-<div id="htmlwidget-90b332fe0656b294606c" style="width:288px;height:288px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-90b332fe0656b294606c">{"x":{"diagram":"digraph {\n\n  \"1\" [label = \"coffee ready\", style = \"filled\", color = \"royalblue2\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"2\" [label = \"ground coffee\", style = \"filled\", color = \"royalblue2\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"3\" [label = \"water heated\", style = \"filled\", color = \"royalblue2\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"4\" [label = \"beans available\", style = \"filled\", color = \"springgreen3\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n\"4\"->\"2\" [id = \"1\", color = \"#000000\", fontcolor = \"#000000\", label = \"button pressed, f()\"] \n\"1\"->\"4\" [id = \"2\", color = \"#000000\", fontcolor = \"#000000\", label = \"take coffee, f()\"] \n\"2\"->\"3\" [id = \"3\", color = \"#000000\", fontcolor = \"#000000\", label = \"heat water, f()\"] \n\"3\"->\"1\" [id = \"4\", color = \"#000000\", fontcolor = \"#000000\", label = \"brew coffee, f()\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M<span class="op">$</span><span class="kw">visualize</span>()</code></pre></div>
+<div id="htmlwidget-53931b2b0bbd8c985af3" style="width:288px;height:288px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-53931b2b0bbd8c985af3">{"x":{"diagram":"digraph {\n\n  \"1\" [label = \"coffee ready\", style = \"filled\", color = \"royalblue2\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"2\" [label = \"ground coffee\", style = \"filled\", color = \"royalblue2\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"3\" [label = \"water heated\", style = \"filled\", color = \"royalblue2\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"4\" [label = \"beans available\", style = \"filled\", color = \"springgreen3\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n\"4\"->\"2\" [id = \"1\", color = \"#000000\", fontcolor = \"#000000\", label = \"button pressed, f()\"] \n\"1\"->\"4\" [id = \"2\", color = \"#000000\", fontcolor = \"#000000\", label = \"take coffee, f()\"] \n\"2\"->\"3\" [id = \"3\", color = \"#000000\", fontcolor = \"#000000\", label = \"heat water, f()\"] \n\"3\"->\"1\" [id = \"4\", color = \"#000000\", fontcolor = \"#000000\", label = \"brew coffee, f()\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 <p>And we can execute a basic lifecycle.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M$<span class="kw">read</span>(<span class="st">&quot;button pressed&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M<span class="op">$</span><span class="kw">read</span>(<span class="st">&quot;button pressed&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;grinding coffee&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M$<span class="kw">read</span>(<span class="st">&quot;heat water&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M<span class="op">$</span><span class="kw">read</span>(<span class="st">&quot;heat water&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;heating water&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M$<span class="kw">read</span>(<span class="st">&quot;brew coffee&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M<span class="op">$</span><span class="kw">read</span>(<span class="st">&quot;brew coffee&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;brewing coffee&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M$<span class="kw">read</span>(<span class="st">&quot;take coffee&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M<span class="op">$</span><span class="kw">read</span>(<span class="st">&quot;take coffee&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;enjoy your coffee&quot;</code></pre>
 <p>But such a machine would get very bad usability results. I just want to press a single button to get my coffee. For this, the machine would have to go without further input or ‘spontaneus’ from one state to another. As an observer cannot determine when this will happen, this can be basically seen as a single transition and the states should be contracted. Alternatively, we can provide an external queue that holds the inputs and where the machine can push back inputs for itself.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Queue &lt;-<span class="st"> </span>R6::<span class="kw">R6Class</span>(<span class="st">&quot;Queue&quot;</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Queue &lt;-<span class="st"> </span>R6<span class="op">::</span><span class="kw">R6Class</span>(<span class="st">&quot;Queue&quot;</span>,
                       <span class="dt">public =</span> <span class="kw">list</span>(
-                        <span class="dt">pop =</span> function(){
-                          r &lt;-<span class="st"> </span>private$q[<span class="dv">1</span>]
-                          private$q&lt;-private$q[-<span class="dv">1</span>]
+                        <span class="dt">pop =</span> <span class="cf">function</span>(){
+                          r &lt;-<span class="st"> </span>private<span class="op">$</span>q[<span class="dv">1</span>]
+                          private<span class="op">$</span>q&lt;-private<span class="op">$</span>q[<span class="op">-</span><span class="dv">1</span>]
                           r
                         },
-                        <span class="dt">push =</span> function(e){
-                          private$q&lt;-<span class="kw">c</span>(e,private$q)
+                        <span class="dt">push =</span> <span class="cf">function</span>(e){
+                          private<span class="op">$</span>q&lt;-<span class="kw">c</span>(e,private<span class="op">$</span>q)
                         },
-                        <span class="dt">append =</span> function(e){
-                          private$q&lt;-<span class="kw">c</span>(private$q,e)
+                        <span class="dt">append =</span> <span class="cf">function</span>(e){
+                          private<span class="op">$</span>q&lt;-<span class="kw">c</span>(private<span class="op">$</span>q,e)
                         },
-                        <span class="dt">length =</span> function(){
-                          <span class="kw">length</span>(private$q)
+                        <span class="dt">length =</span> <span class="cf">function</span>(){
+                          <span class="kw">length</span>(private<span class="op">$</span>q)
                         }
                       ),
                       <span class="dt">private =</span> <span class="kw">list</span>(<span class="dt">q=</span><span class="kw">c</span>())
                     )</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">q &lt;-<span class="st"> </span>Queue$<span class="kw">new</span>()
-M &lt;-<span class="st"> </span>Automat$<span class="kw">new</span>()
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">q &lt;-<span class="st"> </span>Queue<span class="op">$</span><span class="kw">new</span>()
+M &lt;-<span class="st"> </span>Automat<span class="op">$</span><span class="kw">new</span>()
 
-M$<span class="kw">addTransition</span>(<span class="st">&quot;beans available&quot;</span>,<span class="st">&quot;button pressed&quot;</span>,<span class="st">&quot;ground coffee&quot;</span>,function(s,i,t){
-   q$<span class="kw">push</span>(<span class="st">&quot;heat water&quot;</span>)
+M<span class="op">$</span><span class="kw">addTransition</span>(<span class="st">&quot;beans available&quot;</span>,<span class="st">&quot;button pressed&quot;</span>,<span class="st">&quot;ground coffee&quot;</span>,<span class="cf">function</span>(s,i,t){
+   q<span class="op">$</span><span class="kw">push</span>(<span class="st">&quot;heat water&quot;</span>)
    <span class="st">&quot;grinding coffee&quot;</span>
 })
-M$<span class="kw">addTransition</span>(<span class="st">&quot;ground coffee&quot;</span>,<span class="st">&quot;heat water&quot;</span>,<span class="st">&quot;water heated&quot;</span>,function(s,i,t){
-  q$<span class="kw">push</span>(<span class="st">&quot;brew coffee&quot;</span>)
+M<span class="op">$</span><span class="kw">addTransition</span>(<span class="st">&quot;ground coffee&quot;</span>,<span class="st">&quot;heat water&quot;</span>,<span class="st">&quot;water heated&quot;</span>,<span class="cf">function</span>(s,i,t){
+  q<span class="op">$</span><span class="kw">push</span>(<span class="st">&quot;brew coffee&quot;</span>)
   <span class="st">&quot;heating water&quot;</span>
 })
-M$<span class="kw">addTransition</span>(<span class="st">&quot;water heated&quot;</span>,<span class="st">&quot;brew coffee&quot;</span>,<span class="st">&quot;coffee ready&quot;</span>,function(s,i,t){
+M<span class="op">$</span><span class="kw">addTransition</span>(<span class="st">&quot;water heated&quot;</span>,<span class="st">&quot;brew coffee&quot;</span>,<span class="st">&quot;coffee ready&quot;</span>,<span class="cf">function</span>(s,i,t){
   <span class="st">&quot;brewing coffee&quot;</span>
 })
-M$<span class="kw">addTransition</span>(<span class="st">&quot;coffee ready&quot;</span>,<span class="st">&quot;take coffee&quot;</span>,<span class="st">&quot;beans available&quot;</span>,function(s,i,t){
+M<span class="op">$</span><span class="kw">addTransition</span>(<span class="st">&quot;coffee ready&quot;</span>,<span class="st">&quot;take coffee&quot;</span>,<span class="st">&quot;beans available&quot;</span>,<span class="cf">function</span>(s,i,t){
 <span class="st">&quot;enjoy your coffee&quot;</span>
 })
 
-M$<span class="kw">setState</span>(<span class="st">&quot;beans available&quot;</span>)
-q$<span class="kw">append</span>(<span class="st">&quot;button pressed&quot;</span>)
-q$<span class="kw">append</span>(<span class="st">&quot;take coffee&quot;</span>)
+M<span class="op">$</span><span class="kw">setState</span>(<span class="st">&quot;beans available&quot;</span>)
+q<span class="op">$</span><span class="kw">append</span>(<span class="st">&quot;button pressed&quot;</span>)
+q<span class="op">$</span><span class="kw">append</span>(<span class="st">&quot;take coffee&quot;</span>)
 
-while (q$<span class="kw">length</span>() &gt;<span class="st"> </span><span class="dv">0</span>){
-  <span class="kw">print</span>(M$<span class="kw">read</span>(q$<span class="kw">pop</span>()))
+<span class="cf">while</span> (q<span class="op">$</span><span class="kw">length</span>() <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>){
+  <span class="kw">print</span>(M<span class="op">$</span><span class="kw">read</span>(q<span class="op">$</span><span class="kw">pop</span>()))
 }</code></pre></div>
 <pre><code>## [1] &quot;grinding coffee&quot;
 ## [1] &quot;heating water&quot;
 ## [1] &quot;brewing coffee&quot;
 ## [1] &quot;enjoy your coffee&quot;</code></pre>
 <p>As a last example, we look at a more complex variant:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M &lt;-<span class="st"> </span>Automat$<span class="kw">new</span>()
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M &lt;-<span class="st"> </span>Automat<span class="op">$</span><span class="kw">new</span>()
 
-M$<span class="kw">addTransition</span>(<span class="st">&quot;empty&quot;</span>,<span class="st">&quot;fill beans&quot;</span>,<span class="st">&quot;no water&quot;</span>)
-M$<span class="kw">addTransition</span>(<span class="st">&quot;empty&quot;</span>,<span class="st">&quot;fill water&quot;</span>,<span class="st">&quot;no beans&quot;</span>)
-M$<span class="kw">addTransition</span>(<span class="st">&quot;empty&quot;</span>,<span class="ot">NA</span>,<span class="st">&quot;empty&quot;</span>,function(s,i,t){          <span class="co"># (1)</span>
+M<span class="op">$</span><span class="kw">addTransition</span>(<span class="st">&quot;empty&quot;</span>,<span class="st">&quot;fill beans&quot;</span>,<span class="st">&quot;no water&quot;</span>)
+M<span class="op">$</span><span class="kw">addTransition</span>(<span class="st">&quot;empty&quot;</span>,<span class="st">&quot;fill water&quot;</span>,<span class="st">&quot;no beans&quot;</span>)
+M<span class="op">$</span><span class="kw">addTransition</span>(<span class="st">&quot;empty&quot;</span>,<span class="ot">NA</span>,<span class="st">&quot;empty&quot;</span>,<span class="cf">function</span>(s,i,t){          <span class="co"># (1)</span>
   <span class="kw">print</span>(<span class="kw">paste0</span>(<span class="st">&quot;'&quot;</span>, i, <span class="st">&quot;': that does not help, still &quot;</span>, t))
   <span class="kw">return</span>()
 })
 
-M$<span class="kw">addTransition</span>(<span class="st">&quot;no water&quot;</span>,<span class="st">&quot;fill water&quot;</span>,<span class="st">&quot;ready&quot;</span>)
-M$<span class="kw">addTransition</span>(<span class="st">&quot;no beans&quot;</span>,<span class="st">&quot;fill beans&quot;</span>,<span class="st">&quot;ready&quot;</span>)
+M<span class="op">$</span><span class="kw">addTransition</span>(<span class="st">&quot;no water&quot;</span>,<span class="st">&quot;fill water&quot;</span>,<span class="st">&quot;ready&quot;</span>)
+M<span class="op">$</span><span class="kw">addTransition</span>(<span class="st">&quot;no beans&quot;</span>,<span class="st">&quot;fill beans&quot;</span>,<span class="st">&quot;ready&quot;</span>)
 
-M$<span class="kw">setPredicate</span>(<span class="st">&quot;no beans&quot;</span>,function(i){                       <span class="co"># (2)</span>
-  if (<span class="kw">grepl</span>(<span class="st">&quot;fill beans|coffee&quot;</span>,i)){
+M<span class="op">$</span><span class="kw">setPredicate</span>(<span class="st">&quot;no beans&quot;</span>,<span class="cf">function</span>(i){                       <span class="co"># (2)</span>
+  <span class="cf">if</span> (<span class="kw">grepl</span>(<span class="st">&quot;fill beans|coffee&quot;</span>,i)){
     <span class="kw">return</span>(<span class="st">&quot;fill beans&quot;</span>)
   }
   <span class="kw">return</span>(i)
 })
 
-M$<span class="kw">addTransition</span>(<span class="st">&quot;ready&quot;</span>,<span class="st">&quot;press button&quot;</span>,<span class="st">&quot;coffee ready&quot;</span>,function(s,i,t){
+M<span class="op">$</span><span class="kw">addTransition</span>(<span class="st">&quot;ready&quot;</span>,<span class="st">&quot;press button&quot;</span>,<span class="st">&quot;coffee ready&quot;</span>,<span class="cf">function</span>(s,i,t){
   <span class="kw">print</span>(<span class="st">&quot;grinding coffee&quot;</span>)                                   <span class="co"># (3)</span>
   <span class="kw">print</span>(<span class="st">&quot;heating water&quot;</span>)
   <span class="kw">print</span>(<span class="st">&quot;brewing coffee&quot;</span>)
@@ -204,65 +203,65 @@ M$<span class="kw">addTransition</span>(<span class="st">&quot;ready&quot;</span
   <span class="kw">return</span>()
 })
 
-M$<span class="kw">addTransition</span>(<span class="st">&quot;coffee ready&quot;</span>,<span class="st">&quot;take coffee&quot;</span>,<span class="st">&quot;ready&quot;</span>,function(s,i,t){
+M<span class="op">$</span><span class="kw">addTransition</span>(<span class="st">&quot;coffee ready&quot;</span>,<span class="st">&quot;take coffee&quot;</span>,<span class="st">&quot;ready&quot;</span>,<span class="cf">function</span>(s,i,t){
   <span class="kw">print</span>(<span class="st">&quot;enjoy your coffee&quot;</span>)
   <span class="kw">return</span>()
 })
 
-M$<span class="kw">addTransition</span>(<span class="ot">NA</span>,<span class="st">&quot;clean machine&quot;</span>,<span class="st">&quot;empty&quot;</span>)                  <span class="co"># (4)</span>
-M$<span class="kw">addTransition</span>(<span class="ot">NA</span>,<span class="ot">NA</span>,<span class="st">&quot;awaiting service&quot;</span>,function(s,i,t){    <span class="co"># (5)</span>
+M<span class="op">$</span><span class="kw">addTransition</span>(<span class="ot">NA</span>,<span class="st">&quot;clean machine&quot;</span>,<span class="st">&quot;empty&quot;</span>)                  <span class="co"># (4)</span>
+M<span class="op">$</span><span class="kw">addTransition</span>(<span class="ot">NA</span>,<span class="ot">NA</span>,<span class="st">&quot;awaiting service&quot;</span>,<span class="cf">function</span>(s,i,t){    <span class="co"># (5)</span>
   <span class="kw">print</span>(<span class="kw">paste0</span>(<span class="st">&quot;Thou shall not &quot;</span>,i,<span class="st">&quot; in state (&quot;</span>,s,<span class="st">&quot;).</span><span class="ch">\n</span><span class="st">Please clean the machine.&quot;</span>))
   <span class="kw">return</span>()
 })         
 
-M$<span class="kw">addTransition</span>(<span class="ot">NA</span>,<span class="ot">NA</span>,<span class="ot">NA</span>,function(s,i,t){                    <span class="co"># (6)</span>
+M<span class="op">$</span><span class="kw">addTransition</span>(<span class="ot">NA</span>,<span class="ot">NA</span>,<span class="ot">NA</span>,<span class="cf">function</span>(s,i,t){                    <span class="co"># (6)</span>
   <span class="kw">print</span>(<span class="kw">paste0</span>(<span class="st">&quot;Log: (&quot;</span>,s,<span class="st">&quot;,&quot;</span>,i,<span class="st">&quot;,&quot;</span>,t,<span class="st">&quot;)&quot;</span>))
 })         
 
-M$<span class="kw">setState</span>(<span class="st">&quot;empty&quot;</span>)</code></pre></div>
+M<span class="op">$</span><span class="kw">setState</span>(<span class="st">&quot;empty&quot;</span>)</code></pre></div>
 <p>This example shows the flexibility of the Automat class. At (1) we have a “by-any”-transition. If none of the explictly state inputs is matched, this wildcard transition matches and is taken. The complementary “from-any” transition type is used at (4): Whenever no explicit transition nor a “by-any”-transition match, the “from-any”-transitions are scanned for matching inputs. In the example a “clean machine” is accepted in any state and leads to an “empty” machine. Finally a default or fallback action is set at (5). Whenever something unexpected happens to the coffee machine it blocks and awaits to be cleaned. This is not to be confused with the always-action set at (6). It is not a true transition and provides a hook for a function that is always executed after a valid transition. Here it is used to provide logging. Another feature is shown at (2): Each state can be outfitted with a predicate function, that pre-processes the input before it is matched againt the possible transitions. Here you can say “fill beans” or “fill coffee” to get from “no beans”to “ready”.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M$<span class="kw">visualize</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M<span class="op">$</span><span class="kw">visualize</span>()</code></pre></div>
 <div class="figure">
-<div id="htmlwidget-8188ad3321cd58c32474" style="width:288px;height:288px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8188ad3321cd58c32474">{"x":{"diagram":"digraph {\n\n  \"1\" [label = \"coffee ready\", style = \"filled\", color = \"royalblue2\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"2\" [label = \"no beans\", style = \"filled\", color = \"royalblue2\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"3\" [label = \"no water\", style = \"filled\", color = \"royalblue2\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"4\" [label = \"ready\", style = \"filled\", color = \"royalblue2\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"5\" [label = \"awaiting service\", style = \"filled\", color = \"royalblue2\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"6\" [label = \"empty\", style = \"filled\", color = \"springgreen3\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n\"1\"->\"4\" [id = \"1\", color = \"#000000\", fontcolor = \"#000000\", label = \"take coffee, f()\"] \n\"6\"->\"3\" [id = \"2\", color = \"#000000\", fontcolor = \"#000000\", label = \"fill beans\"] \n\"6\"->\"2\" [id = \"3\", color = \"#000000\", fontcolor = \"#000000\", label = \"fill water\"] \n\"2\"->\"4\" [id = \"4\", color = \"#000000\", fontcolor = \"#000000\", label = \"fill beans\"] \n\"3\"->\"4\" [id = \"5\", color = \"#000000\", fontcolor = \"#000000\", label = \"fill water\"] \n\"4\"->\"1\" [id = \"6\", color = \"#000000\", fontcolor = \"#000000\", label = \"press button, f()\"] \n\"6\"->\"6\" [id = \"7\", color = \"#444444\", fontcolor = \"#444444\", label = \"*, f()\"] \n\"1\"->\"6\" [id = \"8\", color = \"#888888\", fontcolor = \"#888888\", label = \"clean machine\"] \n\"2\"->\"6\" [id = \"9\", color = \"#888888\", fontcolor = \"#888888\", label = \"clean machine\"] \n\"3\"->\"6\" [id = \"10\", color = \"#888888\", fontcolor = \"#888888\", label = \"clean machine\"] \n\"4\"->\"6\" [id = \"11\", color = \"#888888\", fontcolor = \"#888888\", label = \"clean machine\"] \n\"5\"->\"6\" [id = \"12\", color = \"#888888\", fontcolor = \"#888888\", label = \"clean machine\"] \n\"1\"->\"5\" [id = \"13\", color = \"#BBBBBB\", fontcolor = \"#BBBBBB\", label = \"*, f()\"] \n\"6\"->\"5\" [id = \"14\", color = \"#BBBBBB\", fontcolor = \"#BBBBBB\", label = \"*, f()\"] \n\"2\"->\"5\" [id = \"15\", color = \"#BBBBBB\", fontcolor = \"#BBBBBB\", label = \"*, f()\"] \n\"3\"->\"5\" [id = \"16\", color = \"#BBBBBB\", fontcolor = \"#BBBBBB\", label = \"*, f()\"] \n\"4\"->\"5\" [id = \"17\", color = \"#BBBBBB\", fontcolor = \"#BBBBBB\", label = \"*, f()\"] \n\"5\"->\"5\" [id = \"18\", color = \"#BBBBBB\", fontcolor = \"#BBBBBB\", label = \"*, f()\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-d99ab2673a98496a2bad" style="width:288px;height:288px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d99ab2673a98496a2bad">{"x":{"diagram":"digraph {\n\n  \"1\" [label = \"coffee ready\", style = \"filled\", color = \"royalblue2\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"2\" [label = \"no beans\", style = \"filled\", color = \"royalblue2\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"3\" [label = \"no water\", style = \"filled\", color = \"royalblue2\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"4\" [label = \"ready\", style = \"filled\", color = \"royalblue2\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"5\" [label = \"awaiting service\", style = \"filled\", color = \"royalblue2\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"6\" [label = \"empty\", style = \"filled\", color = \"springgreen3\", shape = \"circle\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n\"1\"->\"4\" [id = \"1\", color = \"#000000\", fontcolor = \"#000000\", label = \"take coffee, f()\"] \n\"6\"->\"3\" [id = \"2\", color = \"#000000\", fontcolor = \"#000000\", label = \"fill beans\"] \n\"6\"->\"2\" [id = \"3\", color = \"#000000\", fontcolor = \"#000000\", label = \"fill water\"] \n\"2\"->\"4\" [id = \"4\", color = \"#000000\", fontcolor = \"#000000\", label = \"fill beans\"] \n\"3\"->\"4\" [id = \"5\", color = \"#000000\", fontcolor = \"#000000\", label = \"fill water\"] \n\"4\"->\"1\" [id = \"6\", color = \"#000000\", fontcolor = \"#000000\", label = \"press button, f()\"] \n\"6\"->\"6\" [id = \"7\", color = \"#444444\", fontcolor = \"#444444\", label = \"*, f()\"] \n\"1\"->\"6\" [id = \"8\", color = \"#888888\", fontcolor = \"#888888\", label = \"clean machine\"] \n\"2\"->\"6\" [id = \"9\", color = \"#888888\", fontcolor = \"#888888\", label = \"clean machine\"] \n\"3\"->\"6\" [id = \"10\", color = \"#888888\", fontcolor = \"#888888\", label = \"clean machine\"] \n\"4\"->\"6\" [id = \"11\", color = \"#888888\", fontcolor = \"#888888\", label = \"clean machine\"] \n\"5\"->\"6\" [id = \"12\", color = \"#888888\", fontcolor = \"#888888\", label = \"clean machine\"] \n\"1\"->\"5\" [id = \"13\", color = \"#BBBBBB\", fontcolor = \"#BBBBBB\", label = \"*, f()\"] \n\"6\"->\"5\" [id = \"14\", color = \"#BBBBBB\", fontcolor = \"#BBBBBB\", label = \"*, f()\"] \n\"2\"->\"5\" [id = \"15\", color = \"#BBBBBB\", fontcolor = \"#BBBBBB\", label = \"*, f()\"] \n\"3\"->\"5\" [id = \"16\", color = \"#BBBBBB\", fontcolor = \"#BBBBBB\", label = \"*, f()\"] \n\"4\"->\"5\" [id = \"17\", color = \"#BBBBBB\", fontcolor = \"#BBBBBB\", label = \"*, f()\"] \n\"5\"->\"5\" [id = \"18\", color = \"#BBBBBB\", fontcolor = \"#BBBBBB\", label = \"*, f()\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 The Machine.
 </p>
 </div>
 <p>Above is the transition graph of the coffee machine. Transitions that invoke a function are marked with “f()”.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M$<span class="kw">read</span>(<span class="st">&quot;fill tea&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M<span class="op">$</span><span class="kw">read</span>(<span class="st">&quot;fill tea&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;'fill tea': that does not help, still empty&quot;
 ## [1] &quot;Log: (empty,fill tea,empty)&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M$<span class="kw">read</span>(<span class="st">&quot;fill water&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M<span class="op">$</span><span class="kw">read</span>(<span class="st">&quot;fill water&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;Log: (empty,fill water,no beans)&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M$<span class="kw">read</span>(<span class="st">&quot;fill coffee&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M<span class="op">$</span><span class="kw">read</span>(<span class="st">&quot;fill coffee&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;Log: (no beans,fill coffee,ready)&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M$<span class="kw">read</span>(<span class="st">&quot;press button&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M<span class="op">$</span><span class="kw">read</span>(<span class="st">&quot;press button&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;grinding coffee&quot;
 ## [1] &quot;heating water&quot;
 ## [1] &quot;brewing coffee&quot;
 ## [1] &quot;please take your coffee&quot;
 ## [1] &quot;Log: (ready,press button,coffee ready)&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M$<span class="kw">read</span>(<span class="st">&quot;take coffee&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M<span class="op">$</span><span class="kw">read</span>(<span class="st">&quot;take coffee&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;enjoy your coffee&quot;
 ## [1] &quot;Log: (coffee ready,take coffee,ready)&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M$<span class="kw">read</span>(<span class="st">&quot;press button&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M<span class="op">$</span><span class="kw">read</span>(<span class="st">&quot;press button&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;grinding coffee&quot;
 ## [1] &quot;heating water&quot;
 ## [1] &quot;brewing coffee&quot;
 ## [1] &quot;please take your coffee&quot;
 ## [1] &quot;Log: (ready,press button,coffee ready)&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M$<span class="kw">read</span>(<span class="st">&quot;press button&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M<span class="op">$</span><span class="kw">read</span>(<span class="st">&quot;press button&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;Thou shall not press button in state (coffee ready).\nPlease clean the machine.&quot;
 ## [1] &quot;Log: (coffee ready,press button,awaiting service)&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M$<span class="kw">read</span>(<span class="st">&quot;fill coffee&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M<span class="op">$</span><span class="kw">read</span>(<span class="st">&quot;fill coffee&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;Thou shall not fill coffee in state (awaiting service).\nPlease clean the machine.&quot;
 ## [1] &quot;Log: (awaiting service,fill coffee,awaiting service)&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M$<span class="kw">read</span>(<span class="st">&quot;clean machine&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M<span class="op">$</span><span class="kw">read</span>(<span class="st">&quot;clean machine&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;Log: (awaiting service,clean machine,empty)&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M$<span class="kw">read</span>(<span class="st">&quot;fill beans&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M<span class="op">$</span><span class="kw">read</span>(<span class="st">&quot;fill beans&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;Log: (empty,fill beans,no water)&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M$<span class="kw">read</span>(<span class="st">&quot;fill water&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M<span class="op">$</span><span class="kw">read</span>(<span class="st">&quot;fill water&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;Log: (no water,fill water,ready)&quot;</code></pre>
 </div>
 
